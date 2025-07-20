@@ -1,0 +1,65 @@
+services:
+  dns-primary-ipv6:
+    build:
+      context: ./dns-primary-ipv6
+      dockerfile: Dockerfile
+    image: dns-primary-ipv6:latest
+    container_name: dns-primary-ipv6
+    hostname: dns-primary-ipv6
+    networks:
+      services_net:
+        ipv6_address: 2001:db8:1234:0102::133
+    volumes:
+      - ./dns-primary-ipv6/named.conf.options:/etc/bind/named.conf.options
+      - ./dns-primary-ipv6/named.conf.local:/etc/bind/named.conf.local
+      - ./dns-primary-ipv6/zones/:/etc/bind/zones/
+    cap_add:
+      - NET_ADMIN
+    privileged: true
+    restart: unless-stopped
+
+  dns-secondary-ipv6:
+    build:
+      context: ./dns-secondary-ipv6
+      dockerfile: Dockerfile
+    image: dns-secondary-ipv6:latest
+    container_name: dns-secondary-ipv6
+    hostname: dns-secondary-ipv6
+    networks:
+      services_net:
+        ipv6_address: 2001:db8:1234:0102::134
+    volumes:
+      - ./dns-secondary-ipv6/named.conf.options:/etc/bind/named.conf.options
+      - ./dns-secondary-ipv6/named.conf.local:/etc/bind/named.conf.local
+      - ./dns-secondary-ipv6/zones/:/etc/bind/zones/
+    cap_add:
+      - NET_ADMIN
+    privileged: true
+    restart: unless-stopped
+
+  dhcp6-server:
+    build:
+      context: ./dhcp6-server
+      dockerfile: Dockerfile
+    image: dhcp6-server:latest
+    container_name: dhcp6-server
+    hostname: dhcp6-server
+    networks:
+      services_net:
+        ipv6_address: 2001:db8:1234:0102::132
+    volumes:
+      - ./dhcp6-server/dhcpd6.conf:/etc/dhcp/dhcpd6.conf
+      - ./dhcp6-server/isc-dhcp-server:/etc/default/isc-dhcp-server
+    cap_add:
+      - NET_ADMIN
+    privileged: true
+    restart: unless-stopped
+
+networks:
+  services_net:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+        - subnet: "2001:db8:1234:0102::/64"

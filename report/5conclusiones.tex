@@ -1,0 +1,19 @@
+El presente Trabajo de Fin de Grado ha permitido diseñar una infraestructura de red moderna y escalable cogiendo de referencia el pliego de proyectos del Consorcio de Aguas de la Zona Gaditana, centrada en la mejora de la conectividad, la seguridad y la integración de servicios en sus distintas sedes. A través del uso de tecnologías como \texttt{SD-WAN}, direccionamiento IPv6, telefonía IP y cortafuegos de nueva generación.
+
+\vspace{0.5cm}
+Durante el desarrollo del proyecto se ha realizado un análisis detallado de los requisitos técnicos y se ha diseñado una topología en estrella con una arquitectura de red jerárquica de tres capas (núcleo, distribución y acceso). Además, se han seleccionado los dispositivos de red, teniendo en cuenta su rendimiento, escalabilidad, compatibilidad y coste.
+
+\vspace{0.5cm}
+La simulación de la red mediante \texttt{GNS3} ha servido para validar parcialmente el diseño propuesto, a pesar de las limitaciones técnicas de la herramienta frente a entornos reales basados en soluciones como \texttt{Cisco Meraki}. 
+
+\vspace{0.5cm}
+A partir del trabajo realizado, se proponen las siguientes líneas de trabajo que pueden servir para mejorar el desarrollo y evolución del proyecto:
+\begin{itemize}
+  \item \textbf{Implantación de sistemas en la nube:} implementar la centralita \texttt{FreePBX} en la plataforma \texttt{Microsoft Azure}, aprovechando la escalabilidad y disponibilidad que ofrece la nube. Además, se recomienda integrar \texttt{Microsoft Sentinel} como plataforma de respuesta ante incidentes, permitiendo la monitorización, detección y gestión centralizada de amenazas y eventos de seguridad relacionados con la telefonía IP y otros servicios críticos.
+
+  \item \textbf{Automatización de la configuración de red:} usar herramientas como \texttt{Ansible} o scripts \texttt{Python} para automatizar el despliegue y configuración de routers y switches en la simulación.
+
+  \item \textbf{Automatización y monitorización avanzada:} desplegar herramientas de monitorización complementarias como \texttt{Zabbix} para lograr una supervisión más detallada de los servicios y dispositivos no gestionados por \texttt{Meraki}.
+
+  \item \textbf{Evaluación del rendimiento simulado y mejora continua:} realizar pruebas de estrés, análisis de tráfico y simulaciones de escenarios críticos en entornos virtuales como \texttt{GNS3}, con el objetivo de validar el diseño propuesto, optimizar su comportamiento teórico y detectar posibles debilidades en la arquitectura de red.
+\end{itemize}

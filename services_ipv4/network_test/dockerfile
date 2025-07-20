@@ -1,0 +1,22 @@
+FROM debian:bookworm-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    iproute2 \
+    iputils-ping \
+    curl \
+    tcpdump \
+    net-tools \
+    dnsutils \
+    traceroute \
+    iputils-tracepath \
+    vim \
+    bash \
+    isc-dhcp-client \
+    ifupdown \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]

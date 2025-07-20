@@ -1,0 +1,81 @@
+Como se indicó anteriormente no es objetivo implementar en la totalidad de las condiciones del pliego \cite{expediente0062020}. Aquí se detallan los aspectos más importantes que se van a considerar.
+
+\section{Comunicaciones de datos e internet}
+El proyecto contempla la provisión de servicios de transmisión de datos entre las distintas sedes del Consorcio y el acceso a Internet, estableciendo una red IP privada y asegurando su alineación con 
+los principios de calidad, flexibilidad, fiabilidad, capacidad y tecnología avanzada. Los servicios de comunicación entre las sedes serán:
+\begin{itemize}
+	\item \textbf{Implementación de red IP privada:} se creará una red de datos utilizando circuitos dedicados para interconectar todas las sedes de manera segura, extendiendo y unificando las redes LAN existentes.
+	\item \textbf{Acceso a Internet:} todas las sedes accederán a Internet a través del circuito ubicado en la Oficina Central. La totalidad de las sedes se conectarán a la red mediante la Intranet, utilizando un acceso único corporativo que estará soportado por fibra óptica, garantizando así una conexión eficiente y centralizada.
+	\item \textbf{Escalabilidad y priorización de tráfico:} la red se diseñará para permitir un crecimiento futuro, garantizando el soporte para nuevos servicios y priorizando el tráfico, asegurando la calidad de la telefonía IP.
+	\item \textbf{Tecnología de conexión:} se preferirá utilizar enlaces terrestres de fibra óptica, evitando tecnologías satelitales, con una obligación de mantener un alto nivel de disponibilidad en la configuración de la red.
+	\item \textbf{Monitoreo y gestión:} elección de sistemas de monitorización en tiempo real que permitan la consulta del uso del caudal y alertas rápidas en caso de fallos.
+	\item \textbf{Capacidades técnicas:} las conexiones deberán soportar una serie de requisitos de calidad del servicio (QoS), garantizando la baja latencia, alta capacidad de gestión de tráfico y compatibilidad con los estándares de direccionamiento de ITU-T.
+\end{itemize}
+\section{Servicio de electrónica de red gestionada}
+\label{sec:servicio_electronica_red}
+La infraestructura de red electrónica gestionada del Consorcio se diseñará para proporcionar una base sólida, flexible y escalable que permita el crecimiento y la adaptación a las necesidades cambiantes de la organización. 
+Cada sede tendrá una red de área local (LAN) que garantice la conectividad eficiente de todos los dispositivos, asegurando la integración con la red IP privada y el resto de servicios corporativos.
+
+\vspace{0.5cm}
+Para ello, se instalarán switches gestionables que proporcionen la densidad de puertos Ethernet necesaria para conectar todos los equipos requeridos en cada sede, evitando el uso de hubs y asegurando una infraestructura moderna y eficiente. Estos switches soportarán velocidades mínimas de 100 Mbps por puerto y contarán con capacidades Power over Ethernet (PoE), lo que permitirá alimentar terminales VoIP y otros dispositivos de red directamente a través del cableado de datos, simplificando la instalación y el mantenimiento.
+
+\vspace{0.5cm}
+La solución de electrónica de red incluirá funcionalidades avanzadas como la configuración de VLANs para segmentar el tráfico, así como herramientas de Calidad de Servicio (QoS) que permitan clasificar y priorizar el tráfico, garantizando la calidad en servicios críticos como la telefonía IP. Además, se implementará la norma IEEE 802.3az para mejorar la eficiencia energética de la infraestructura.
+
+\vspace{0.5cm}
+En cuanto a la conectividad entre sedes, se proveerán routers de alto rendimiento que permitan la integración con tecnologías SD-WAN, facilitando la gestión centralizada y flexible de la red, así como el acceso seguro a través de conexiones VPN. Todo el equipamiento será seleccionado para asegurar la alta disponibilidad, la seguridad y la capacidad de adaptación a futuras ampliaciones o cambios en la red del consorcio.
+
+\section{Servicio de seguridad gestionado}
+\label{sec:servicios_seguridad_gestionado}
+El servicio de seguridad gestionado se diseñará para proteger la infraestructura de red del consorcio, garantizando la confidencialidad, integridad y disponibilidad de los datos y servicios. Este servicio incluirá la elección de un cortafuegos de nueva generación (NGFW) que proporcionará una defensa robusta contra amenazas externas e internas, así como la gestión centralizada de la seguridad a través de un sistema de monitorización y gestión.
+
+\vspace{0.5cm}
+El consorcio dispondrá de un sistema de consulta estadística online para monitorizar y gestionar el uso del caudal mediante una aplicación web segura con autenticación de usuario. Además, dispondrá de un sistema de alertas en caso de que se produzca un fallo en los enlaces o en las líneas de acceso principales o de respaldo. También, el sistema de seguridad gestionado deberá incluir las siguientes características:
+\begin{itemize}
+	\item \textbf{Recepción de información:} el sistema permitirá la recepción de datos a través de SYSLOG para facilitar la monitorización continua y la identificación temprana de vulnerabilidades.
+	\item \textbf{Actualizaciones y modificaciones:} se realizarán recomendaciones y actualizaciones remotas del software en caso de detectar vulnerabilidades, así como modificaciones en políticas de seguridad como respuesta a incidentes.
+	\item \textbf{Centro de gestión:} habrá un centro de gestión en las instalaciones del licitador, que operará de manera coordinada y homogénea con el Consorcio.
+\end{itemize}
+
+Por otro lado, se elegirá una plataforma de seguridad avanzada para la gestión de amenazas que limite el tráfico entre Internet y la red interna del Consorcio, proporcionando funcionalidades como filtrado antivirus, detección de aplicaciones, control de navegación y respuesta ante incidentes. Además, se combinará con un sistema de respuesta ante incidentes que automatice procedimientos predefinidos y gestione accesos mediante VPN, garantizando una solución rápida y efectiva ante eventos de seguridad.
+
+\subsection{Especificaciones técnicas del equipamiento}
+\label{subsec:especificaciones_tecnicas_firewall}
+\noindent
+El cortafuegos debe cumplir con las siguientes especificaciones:
+\begin{itemize}
+  \item \textbf{Certificaciones:} ICSA, NSS Labs y Common Criteria.
+  \item \textbf{Rendimiento:} hasta 20/20/9 Gbps de firewall, 2 millones de sesiones concurrentes, 135.000 nuevas sesiones por segundo, y 1.2 Gbps de Threat Protection.
+  \item \textbf{Funcionalidades:} IPS (hasta 6 Gbps), proxy explícito, visualización de tráfico, escaneo de vulnerabilidades, antivirus, antispam y filtrado de contenidos.
+  \item \textbf{Licenciamiento:} por equipo, no por usuario.
+  \item \textbf{Interfaces:} 14 puertos 1GE RJ45 internos, 2 puertos WAN, 2 slots SFP, 2 puertos Management/DMZ, 2 para HA, 1 consola y 1 USB.
+  \item \textbf{Virtualización:} soporte de 10 dominios virtuales con monitorización de recursos.
+  \item \textbf{Control de aplicaciones:} identificación de 2900+ aplicaciones, clasificación granular y detección bajo túneles HTTPS.
+  \item \textbf{Visibilidad:} consolidación de logs, visualización en tiempo real y gestión de sesiones.
+  \item \textbf{Filtrado de contenidos:} control granular de URLs, cuotas de tiempo, listas blancas/negras, filtrado DNS y sinkhole.
+  \item \textbf{Seguridad:} políticas por interfaz, prevención de amenazas, DLP, actualizaciones automáticas, doble factor de autenticación, bloqueo de botnets, inspección SSL y motor WAF.
+  \item \textbf{VPN:} hasta 9 Gbps IPSec, 300 usuarios VPN SSL simultáneos, soporte para múltiples protocolos VPN.
+\end{itemize}
+
+\section{Comunicaciones fijas de voz}
+En este apartado se detallan alguno de los requisitos que debe cumplir el servicio de comunicaciones fijas de voz, aunque no se contempla su implementación en el alcance de este proyecto. Estos requisitos servirán como referencia para futuras fase.
+
+\vspace{0.5cm}
+\noindent
+Las especificaciones requeridas incluyen:
+\begin{itemize}
+	\item \textbf{Integración y escalabilidad:} se contempla al menos 38 extensiones, renovando los terminales actuales por modelos de VoIP.
+	\item \textbf{Requisitos técnicos:} la centralita estará alojada preferentemente en la nube, con los terminales IP instalados localmente en cada sede. Se utilizarán conexiones IP estándar para la gestión de llamadas, permitiendo una numeración integrada y acceso a diferentes tipos de terminales, incluidos modelos de sobremesa.
+	\item \textbf{Funcionalidades avanzadas:} se requerirán características como buzones de voz, grabación de llamadas y operadora automática personalizada. Se definirán grupos de salto y captura para optimizar el manejo de las llamadas.
+	\item \textbf{Cableado y accesibilidad:} se deberá contemplar el cableado de datos de categoría CAT6, asegurando la conectividad necesaria para la telefonía IP y los servicios de datos, así como la posibilidad de adaptación a futuras necesidades en infraestructura.
+	\item \textbf{Gestión y mantenimiento:} se exigirá la operación y mantenimiento integral de la red durante el contrato, garantizando la gestión continua y la evolución de los servicios conforme avance la tecnología.
+\end{itemize}
+
+\label{sec:requisitos_telefonia_ip}
+\vspace{0.3cm}
+Asimismo, los teléfonos IP que se utilicen deberán cumplir, como mínimo, los siguientes requisitos:
+\begin{itemize}
+	\item Dos puertos Ethernet de 100Mbps o de 1Gbps: uno para la alimentación y conexión a la red del terminal y otro para la conexión del PC al terminal, permitiendo la alimentación tanto por red eléctrica como a través del puerto Ethernet (PoE, Power over Ethernet).
+	\item Disponer de manos libres full dúplex con altavoz y micrófono ambiente. Los terminales deberán ser completamente nuevos.
+	\item Permitir la asignación de dirección IP mediante DHCP.
+\end{itemize}

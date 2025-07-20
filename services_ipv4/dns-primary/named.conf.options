@@ -1,0 +1,35 @@
+options {
+    directory "/var/cache/bind";
+
+    // Escucha solo en su IP privada
+    listen-on { 192.168.1.133; };
+    listen-on-v6 { none; };  // si no estás usando IPv6 aquí
+
+    // Consultas permitidas desde red local
+    allow-query {
+        192.168.1.0/28;
+        localhost;
+    };
+
+    // Reenvío a DNS externos para dominios no autoritativos
+    forwarders {
+        8.8.8.8;
+        1.1.1.1;
+    };
+
+    // Habilitar recursión para la red local
+    recursion yes;
+    allow-recursion {
+        192.168.1.0/28;
+        localhost;
+    };
+
+    // Permitir uso del caché
+    allow-cache {
+        192.168.1.0/28;
+        localhost;
+    };
+
+    dnssec-validation auto;
+    auth-nxdomain no;
+};

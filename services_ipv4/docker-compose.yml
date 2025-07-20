@@ -1,0 +1,66 @@
+services:
+  dhcp-server:
+    build:
+      context: ./dhcp
+      dockerfile: Dockerfile
+    image: dhcp_server:latest
+    container_name: dhcp-server
+    hostname: dhcp
+    networks:
+      dmz_network:
+        ipv4_address: 192.168.1.132
+    volumes:
+      - ./dhcp/dhcpd.conf:/etc/dhcp/dhcpd.conf
+      - ./dhcp/isc-dhcp-server:/etc/default/isc-dhcp-server
+    cap_add:
+      - NET_ADMIN
+    privileged: true
+    restart: unless-stopped
+
+  dns-primary:
+    build:
+      context: ./dns-primary
+      dockerfile: Dockerfile
+    image: dns_primary_server:latest 
+    container_name: dns-primary
+    hostname: ns1
+    networks:
+      dmz_network:
+        ipv4_address: 192.168.1.133
+    volumes:
+      - ./dns-primary/named.conf.options:/etc/bind/named.conf.options
+      - ./dns-primary/named.conf.local:/etc/bind/named.conf.local
+      - ./dns-primary/zones:/etc/bind/zones
+    ports:
+      - "5353:53/udp"
+      - "5353:53/tcp"
+    restart: unless-stopped
+
+  dns-secondary:
+    build:
+      context: ./dns-secondary
+      dockerfile: Dockerfile
+    image: dns_secondary_server:latest
+    container_name: dns-secondary
+    hostname: ns2
+    networks:
+      dmz_network:
+        ipv4_address: 192.168.1.134
+    volumes:
+      - ./dns-secondary/named.conf.options:/etc/bind/named.conf.options
+      - ./dns-secondary/named.conf.local:/etc/bind/named.conf.local
+      - ./dns-secondary/zones:/etc/bind/zones
+    ports:
+      - "5454:53/udp"
+      - "5454:53/tcp"
+    depends_on:
+      - dns-primary
+    restart: unless-stopped
+
+networks:
+  dmz_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.128/28
+          gateway: 192.168.1.131

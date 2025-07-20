@@ -1,0 +1,36 @@
+options {
+    directory "/var/cache/bind";
+
+    // ns2 escucha solo en su propia IP
+    listen-on-v6 { 2001:db8:1234:0102::134; };
+    listen-on { none; };
+
+    // Permitir consultas solo desde red local
+    allow-query {
+        2001:db8:1234::/48;
+        localhost;
+    };
+
+    // Permitir recursión para red local
+    recursion yes;
+    allow-recursion {
+        2001:db8:1234::/48;
+        localhost;
+    };
+
+    // Permitir uso del caché DNS
+    allow-cache {
+        2001:db8:1234::/48;
+        localhost;
+    };
+
+    // Redirigir consultas externas si no es autoritativo
+    forwarders {
+        2001:4860:4860::8888;
+        2001:4860:4860::8844;
+    };
+
+    // Seguridad
+    dnssec-validation auto;
+    auth-nxdomain no;
+};

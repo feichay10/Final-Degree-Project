@@ -1,0 +1,18 @@
+options {
+    directory "/var/cache/bind";
+    
+    listen-on { 192.168.1.134; }; // ns2 IP privada
+    allow-query { any; }; // Redes desde las que se permiten consultas
+        
+    // Reenviar consultas externas a Google y Cloudflare DNS
+    forwarders {
+        8.8.8.8;
+        1.1.1.1;
+    };
+        
+    recursion yes;
+    
+    // Configuraciones adicionales de seguridad
+    dnssec-validation auto;
+    auth-nxdomain no;    # conform to RFC1035
+}; 

@@ -1,0 +1,12 @@
+$TTL    60
+@       IN      SOA     ns1.cazg.es. admin.cazg.es. (
+                        2025051001      ; Serial
+                        60              ; Refresh
+                        60              ; Retry
+                        60              ; Expire
+                        60 )            ; TTL
+
+        IN      NS      ns1.cazg.es.
+        IN      NS      ns2.cazg.es.
+1.3.3.0.0.0.0.0.0.0.0.0.0.0.0.0.2.0.1.0.4.3.2.1.8.b.d.0.1.0.0.2.ip6.arpa. IN PTR ns1.cazg.es.
+4.3.3.0.0.0.0.0.0.0.0.0.0.0.0.0.2.0.1.0.4.3.2.1.8.b.d.0.1.0.0.2.ip6.arpa. IN PTR ns2.cazg.es. 

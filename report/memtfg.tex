@@ -1,0 +1,844 @@
+\documentclass[spanish,a4paper,11pt,oneside]{extreport}
+% \documentclass[12pt,a4paper,oneside]{report}
+
+% Fonts
+% For use with XeLaTeX
+\usepackage{amsmath}
+\usepackage{fontspec}
+\setmainfont[%
+  Path              = ./fonts/ArgentumSans/,%
+  Extension         = .ttf,
+  UprightFont       = *-Light,
+  BoldFont          = *-SemiBold, % ULL bold font
+  ItalicFont        = *-LightItalic,
+  BoldItalicFont    = *-SemiBoldItalic, % Linux Libertine O Regular Semibold Italic
+  Scale             = 0.95%
+]%
+{hinted-ArgentumSans}
+
+\usepackage[spanish,es-tabla]{babel} % Para español
+\usepackage{csquotes} % Para mejorar el formato de las citas 
+% \usepackage[backend=biber,style=ieee,sorting=none]{biblatex} % Activa IEEE
+
+% \usepackage[utf8]{inputenc}
+% Only with pdflatex
+
+%\usepackage{alltt}
+
+%\usepackage[ruled,vlined,commentsnumbered,linesnumbered,inoutnumbered,titlenotnumbered,noend]{algorithm2e}
+%\SetKwRepeat{Do}{do}{while}
+%
+\usepackage{afterpage}
+\usepackage{multirow}
+\usepackage{array} 
+%\usepackage{amsfonts}
+\usepackage{amsmath}
+%\usepackage{bigstrut}
+%\usepackage{booktabs}
+%\usepackage{caption}
+%\usepackage{chngpage}
+\usepackage{float}
+\usepackage{enumitem,lipsum}
+%\usepackage{graphicx}
+%\usepackage{lscape}
+%\usepackage{microtype}
+%\usepackage{natbib}
+\usepackage{pdflscape}
+%\usepackage{rotating}
+\usepackage{subcaption}
+% \usepackage{subfigure}
+%\usepackage{ctable}
+\usepackage{hyperref}
+%\usepackage{enumerate}
+%\usepackage{gensymb}
+\usepackage{eurosym}
+\usepackage[scaled]{inconsolata} % fuente tipo consola
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{longtable} % Para tablas que se dividen en múltiples páginas
+\setlist[itemize]{itemsep=0pt,parsep=0pt}
+\usepackage[hypcap=false]{caption}
+\usepackage{tcolorbox}
+
+\synctex=1
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+%
+%\usepackage{lineno}
+%%\\linenumbers
+%\setlength\linenumbersep{5pt}
+%\renewcommand\linenumberfont{\normalfont\tiny\sffamily\color{gray}}
+
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+
+\newenvironment{sourcecode}
+{\begin{list}{}{\setlength{\leftmargin}{1em}}\item\scriptsize\bfseries}
+{\end{list}}
+
+\newenvironment{littlesourcecode}
+{\begin{list}{}{\setlength{\leftmargin}{1em}}\item\tiny\bfseries}
+{\end{list}} 
+
+
+\newenvironment{summary}
+{\par\noindent\begin{center}\textbf{Abstract}\end{center}\begin{itshape}\par\noindent}
+{\end{itshape}}
+
+\newenvironment{keywords}
+{\begin{list}{}{\setlength{\leftmargin}{1em}}\item[\hskip\labelsep \bfseries Keywords:]}
+{\end{list}}
+
+\newenvironment{palabrasClave}
+{\begin{list}{}{\setlength{\leftmargin}{1em}}\item[\hskip\labelsep \bfseries Palabras clave:]}
+{\end{list}}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listado}
+\lstloadlanguages{Python}
+\lstset{
+  language=Python,                      % Python language
+  basicstyle=\small\ttfamily,           % Listados en small y monoespaciado
+  keywordstyle=\color{blue},            % Palabras clave en azul
+  identifierstyle=\color{black},        % Identificadores en negro
+  commentstyle=\color{green!50!black},  % Comentarios en verde oscuro
+  stringstyle=\color{red},              % Cadenas en rojo
+  showstringspaces=false,
+  frame=tb,
+  captionpos=b,
+  belowcaptionskip=12pt,
+  stepnumber=1,                         % Opciones de líneas y etiquetas
+  numbers=left, 
+  numberstyle=\scriptsize,
+  numbersep=5pt,
+  tabsize=4                             % Tamaño de tabulación
+}
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+% Define RouterOS language for listings
+% Define colors for RouterOS syntax highlighting (similar to YAML style)
+\definecolor{roscommand}{RGB}{0,0,255}      % Blue for commands (like yamlkey)
+\definecolor{rosvalue}{RGB}{0,128,0}        % Green for values
+\definecolor{roscomment}{RGB}{128,128,128}  % Gray for comments
+\definecolor{rosstring}{RGB}{255,0,0}       % Red for strings
+\definecolor{rospath}{RGB}{128,0,128}       % Purple for paths like /system, /interface
+
+% Define RouterOS language for listings with YAML-style formatting
+\lstdefinelanguage{RouterOS}{
+    keywords={interface, bridge, add, name, port, address, identity, set, enable, vlan, ethernet, find, ospf, instance, redistribute-connected, as-type-1, numbers, network, area, backbone, true, false, yes, no},
+    keywordstyle=\color{roscommand}\bfseries,
+    sensitive=true,
+    comment=[l]{\#},
+    morecomment=[s]{/*}{*/},
+    commentstyle=\color{roscomment}\ttfamily,
+    stringstyle=\color{rosstring}\ttfamily,
+    moredelim=[s][\color{rosstring}]{"}{"},
+    moredelim=[s][\color{rosstring}]{'}{'},
+    morestring=[b]",
+    morestring=[b]',
+    % Highlight RouterOS paths
+    moredelim=[s][\color{rospath}\bfseries]{/}{\ },
+    basicstyle=\ttfamily\small,
+    showstringspaces=false,
+    showspaces=false,
+    showtabs=false,
+    frame=single,
+    frameround=tttt,
+    rulecolor=\color{black},
+    backgroundcolor=\color{gray!10},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=2,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    columns=fullflexible,
+    keepspaces=true,
+    alsoletter={=/},
+}
+
+% Set default style for RouterOS listings
+\lstset{
+  language=RouterOS,
+}
+
+% Define YAML language for listings
+% Define colors for YAML syntax highlighting
+\definecolor{yamlkey}{RGB}{0,0,255}
+\definecolor{yamlvalue}{RGB}{0,128,0}
+\definecolor{yamlcomment}{RGB}{128,128,128}
+\definecolor{yamlstring}{RGB}{255,0,0}
+
+% Define YAML language for listings
+\lstdefinelanguage{yaml}{
+  keywords={true,false,null,yes,no},
+  keywordstyle=\color{yamlkey}\bfseries,
+  basicstyle=\ttfamily\small,
+  sensitive=true,
+  comment=[l]{\#},
+  commentstyle=\color{yamlcomment}\ttfamily,
+  stringstyle=\color{yamlstring}\ttfamily,
+  moredelim=[s][\color{yamlstring}]{"}{"},
+  moredelim=[s][\color{yamlstring}]{'}{'},
+  morestring=[b]",
+  morestring=[b]',
+  showstringspaces=false,
+  showspaces=false,
+  showtabs=false,
+  frame=single,
+  frameround=tttt,
+  rulecolor=\color{black},
+  backgroundcolor=\color{gray!10},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=2,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=5pt,
+}
+
+% Set default style for YAML listings
+\lstset{
+  language=yaml
+}
+
+% Cisco IOS language for listings
+% Define colors for Cisco IOS syntax highlighting (similar to YAML style)
+\definecolor{ciscocommand}{RGB}{0,0,255}      % Blue for commands
+\definecolor{ciscovalue}{RGB}{0,128,0}        % Green for values/parameters
+\definecolor{ciscocomment}{RGB}{128,128,128}  % Gray for comments
+\definecolor{ciscostring}{RGB}{255,0,0}       % Red for strings
+\definecolor{ciscomode}{RGB}{128,0,128}       % Purple for configuration modes
+\definecolor{ciscokeyword}{RGB}{0,64,128}     % Dark blue for keywords
+
+% Define Cisco IOS language for listings
+% Define colors for Cisco IOS syntax highlighting
+\definecolor{ciscoblue}{RGB}{0,102,204}
+\definecolor{ciscogreen}{RGB}{0,128,0}
+\definecolor{ciscored}{RGB}{204,0,0}
+\definecolor{ciscoorange}{RGB}{255,102,0}
+\definecolor{ciscogray}{RGB}{128,128,128}
+
+% Define the Cisco IOS language
+\lstdefinelanguage{CiscoIOS}{
+  % Keywords - Configuration commands
+  morekeywords=[1]{
+    interface, router, ip, access-list, line, enable, configure, terminal,
+    hostname, banner, service, no, shutdown, exit, end, write, copy,
+    running-config, startup-config, show, debug, clear, reload, boot,
+    version, username, password, secret, clock, logging, snmp-server,
+    ntp, spanning-tree, vlan, switchport, trunk, access, voice,
+    crypto, isakmp, ipsec, transform-set, map, policy, key, string,
+    peer, address, group, lifetime, authentication, encryption,
+    negotiation, proposal, security, association, tunnel, mode,
+    transport, esp, ah, md5, sha, des, 3des, aes
+  },
+  % Keywords - Interface types and protocols
+  morekeywords=[2]{
+    FastEthernet, GigabitEthernet, TenGigabitEthernet, Serial, Loopback,
+    Tunnel, Vlan, Port-channel, Dialer, ATM, Frame-Relay, Ethernet,
+    ospf, eigrp, rip, bgp, isis, static, connected, summary,
+    redistribute, network, area, process-id, autonomous-system,
+    neighbor, route-map, prefix-list, community-list, as-path,
+    tcp, udp, icmp, http, https, ssh, telnet, ftp, tftp, smtp,
+    dns, dhcp, nat, pat, vpn, gre, l2tp, pptp
+  },
+  % Keywords - Show commands and status
+  morekeywords=[3]{
+    running, startup, flash, version, interfaces, protocols,
+    route, arp, mac, address-table, vlan, spanning-tree,
+    access-lists, crypto, sessions, users, processes, memory,
+    cpu, utilization, inventory, license, tech-support,
+    brief, detail, summary
+  },
+  % Keywords - Common parameters and values  
+  morekeywords=[4]{
+    permit, deny, any, host, eq, gt, lt, neq, range, log,
+    established, fragments, precedence, tos, dscp, cos,
+    full-duplex, half-duplex, auto, speed, duplex, mtu,
+    encapsulation, dot1q, isl, native, allowed, pruning,
+    rapid-pvst, pvst, mstp, rstp, stp, portfast, bpduguard,
+    root, priority, cost, hello-time, forward-delay, max-age
+  },
+  % Comments
+  morecomment=[l]{!},
+  morecomment=[s]{/*}{*/},
+  % Strings
+  morestring=[b]",
+  morestring=[b]',
+  % Additional settings
+  sensitive=false,
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny\color{ciscogray},
+  stepnumber=1,
+  tabsize=2,
+  % Styling
+  keywordstyle=[1]\color{ciscoblue}\bfseries,     % Main commands - blue bold
+  keywordstyle=[2]\color{ciscogreen}\bfseries,    % Interfaces/protocols - green bold  
+  keywordstyle=[3]\color{ciscoorange},            % Show commands - orange
+  keywordstyle=[4]\color{ciscored},               % Parameters - red
+  commentstyle=\color{ciscogray}\itshape,         % Comments - gray italic
+  stringstyle=\color{ciscored},                   % Strings - red
+  backgroundcolor=\color{gray!10},        % Light gray background
+  frame=single,
+  frameround=tttt,
+  rulecolor=\color{ciscogray}
+}
+
+% Define a custom style for Cisco IOS
+\lstdefinestyle{CiscoIOSStyle}{
+  language=CiscoIOS,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=[1]\color{ciscoblue}\bfseries,
+  keywordstyle=[2]\color{ciscogreen}\bfseries,
+  keywordstyle=[3]\color{ciscoorange},
+  keywordstyle=[4]\color{ciscored},
+  commentstyle=\color{ciscogray}\itshape,
+  stringstyle=\color{ciscored},
+  backgroundcolor=\color{gray!10},
+  frame=single,
+  frameround=tttt,
+  rulecolor=\color{ciscogray},
+  numbers=left,
+  numberstyle=\tiny\color{ciscogray},
+  breaklines=true,
+  breakatwhitespace=true,
+  showstringspaces=false,
+  tabsize=2,
+  captionpos=b
+}
+
+% Define Docker language for listings
+\lstdefinelanguage{Dockerfile}{
+  keywords={
+    FROM,
+    MAINTAINER,
+    RUN,
+    CMD,
+    LABEL,
+    EXPOSE,
+    ENV,
+    ADD,
+    COPY,
+    VOLUME,
+    USER,
+    WORKDIR,
+    ARG,
+    ONBUILD,
+    STOPSIGNAL,
+    HEALTHCHECK,
+    SHELL
+  },
+  morecomment=[l]{\#},
+  string=[s]{"}{"},
+  string=[s]{'}{'},
+  sensitive=true,
+  keepspaces=false, % To prevent issues with indents in instructions
+  commentstyle=\color{gray}\ttfamily,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{orange}\ttfamily,
+  identifierstyle=\color{black}\ttfamily,
+}
+
+% Espaciado entre parrafo y lineas.
+% Modificar mas abajo, antes del resumen
+%\setlength{\parindent}{4em}
+%\setlength{\parskip}{10pt}
+\renewcommand{\baselinestretch}{1.1}
+
+% Espaciado entre numero de titulo y titulo
+\makeatletter
+\newcommand\mylistoffigures{%
+  \if@twocolumn
+    \@restonecoltrue\onecolumn
+  \else
+    \@restonecolfalse
+  \fi
+  \chapter*{\listfigurename
+    \@mkboth{\MakeUppercase\listfigurename}%
+        {\MakeUppercase\listfigurename}}%
+  \begingroup
+    \let\oldnumberline\numberline
+    \renewcommand{\numberline}[1]{##1.\hspace{0.5em}}%
+    \@starttoc{lof}%
+  \endgroup
+  \if@restonecol\twocolumn\fi
+}
+\newcommand\mylistoftables{%
+  \if@twocolumn
+    \@restonecoltrue\onecolumn
+  \else
+    \@restonecolfalse
+  \fi
+  \chapter*{\listtablename
+    \@mkboth{\MakeUppercase\listtablename}%
+        {\MakeUppercase\listtablename}}%
+  \begingroup
+    \let\oldnumberline\numberline
+    \renewcommand{\numberline}[1]{##1.\hspace{0.5em}}%
+    \@starttoc{lot}%
+  \endgroup
+  \if@restonecol\twocolumn\fi
+}
+\makeatother
+
+
+\begin{document}
+
+\renewcommand\listtablename{Índice de Tablas}
+\renewcommand\listfigurename{Índice de Figuras}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% First Page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{empty}
+\thispagestyle{empty}
+
+
+\newcommand{\HRule}{\rule{\linewidth}{1mm}}
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{0mm}
+
+\vspace*{\stretch{0.5}}
+
+\begin{center}
+	\includegraphics[scale=0.8]{images/escuela-ingenieria-tecnologia-original}\\[10mm]
+	{\Huge\bf  Trabajo de Fin de Grado}
+\end{center}
+
+\HRule
+\begin{center}
+	{\Huge Diseño de infraestructura de red para una empresa multisede} \\[3.5mm]
+	{\Large \textit{Design of network infrastructure for a multi-site company}} \\[5mm]
+	{\Large Cheuk Kelly Ng Pante} \\[5mm]
+
+
+\end{center}
+\HRule
+\vspace*{\stretch{2}}
+\begin{center}
+	\Large La Laguna, \today
+\end{center}
+
+\setlength{\parindent}{5mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Signature page (add the official stamp)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  % Página intencionadamente en blanco
+\end{center}
+\vspace*{\fill}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\thispagestyle{empty}
+
+D. {\bf Jonás Philipp Lüke}, profesor contratado Doctor de Universidad adscrito al Departamento de Ingeniería Industrial de la Universidad de La Laguna, como tutor.
+
+\bigskip
+\bigskip
+{\bf C E R T I F I C A}
+
+\bigskip
+\bigskip
+
+Que la presente memoria titulada:
+
+\bigskip
+''{\it Diseño de infraestructura de red para una empresa multisede}''
+
+\bigskip
+\bigskip
+\bigskip
+
+\noindent ha sido realizada bajo su dirección por D. {\bf Cheuk Kelly Ng Pante}.
+
+\bigskip
+\bigskip
+
+Y para que así conste, en cumplimiento de la legislación vigente y a los efectos
+oportunos firman la presente en La Laguna a \today
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  % Página intencionadamente en blanco
+\end{center}
+\vspace*{\fill}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage
+\thispagestyle{empty}
+
+{ \flushright
+
+	\begin{LARGE}
+		\textbf{Agradecimientos}
+	\end{LARGE}
+
+	\hspace{3mm}
+
+	En primer lugar, quiero agradecer profundamente a mi tutor Jonás Philipp Lüke, por aceptar la
+	realización de este proyecto y por su apoyo constante durante todo el proceso. Su orientación,
+	conocimientos y experiencia han sido fundamentales para el desarrollo de este trabajo.
+
+	\vspace{0.5cm}
+	También quiero agradecer a todas las amistades que he ido haciendo a lo largo de mi carrera, que me han
+	brindado su apoyo y amistad. Su compañía y apoyo han sido una fuente de inspiración y motivación constante.
+
+	\vspace{0.5cm}
+	Por último, quiero agradecer a mi familia, que siempre ha estado ahí para mí, brindándome su amor
+	y apoyo incondicional. Su confianza en mí y su aliento constante me han dado la fuerza necesaria para
+	completar este proyecto y alcanzar mis metas académicas.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  % Página intencionadamente en blanco
+\end{center}
+\vspace*{\fill}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage
+\thispagestyle{empty}
+
+\bigskip
+\begin{center}
+  \begin{LARGE}
+    \textbf{Licencia}
+  \end{LARGE}
+\end{center}
+
+\bigskip
+\bigskip
+\bigskip
+% * Si quiere permitir que se compartan las adaptaciones de tu obra mientras se comparta de la misma manera y quieres permitir usos comerciales de tu obra (licencia de Cultura Libre) indica:
+
+\begin{center}
+	\includegraphics[scale=1.8]{images/by-sa_88x31}\\[5mm]
+\end{center}
+
+\begin{center}
+	© Esta obra está bajo una licencia de Creative Commons \\
+	Reconocimiento-CompartirIgual 4.0 Internacional.
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  % Página intencionadamente en blanco
+\end{center}
+\vspace*{\fill}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\thispagestyle{empty}
+
+\input{0resumen}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  % Página intencionadamente en blanco
+\end{center}
+\vspace*{\fill}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\vspace*{200pt}
+\thispagestyle{empty}
+
+\input{0summary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  % Página intencionadamente en blanco
+\end{center}
+\vspace*{\fill}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage{\pagestyle{empty}}
+\thispagestyle{empty}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{myheadings} %my head defined by markboth or markright
+% No funciona bien \markboth sin "twoside" en \documentclass, pero al
+% ponerlo se dan un montón de errores de underfull \vbox, con lo que no se
+% ha puesto.
+
+
+%%Aqui debería poner el nombre del proyecto pero, como es muy grande no cabe y se ve feo en el PDF
+\markboth{xxxxx}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Numeracion en romanos
+\renewcommand{\thepage}{\roman{page}}
+\setcounter{page}{1}
+\pagestyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  % Página intencionadamente en blanco
+\end{center}
+\vspace*{\fill}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage{\pagestyle{empty}}
+
+\mylistoffigures
+% \listoffigures
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage{\pagestyle{empty}}
+
+\mylistoftables
+% \listoftables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  % Página intencionadamente en blanco
+\end{center}
+\vspace*{\fill}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage{\pagestyle{empty}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+
+% Numeracion a partir del capitulo I
+\renewcommand{\thepage}{\arabic{page}}
+\setcounter{page}{1}
+\pagestyle{plain}
+
+\chapter{\LARGE Introducción}
+\label{chapter:intro}
+
+\input{1cap.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage{\pagestyle{empty}}
+\thispagestyle{empty}
+
+\chapter{\LARGE Análisis de requisitos y requerimientos}
+\label{chapter:dos}
+
+\input{2cap.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage{\pagestyle{empty}}
+\thispagestyle{empty}
+
+\chapter{\LARGE Diseño}
+\label{chapter:tres}
+
+\input{3cap.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage{\pagestyle{empty}}
+\thispagestyle{empty}
+
+\chapter{\LARGE Simulación}
+\label{chapter:cuatro}
+
+\input{4cap.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  % Página intencionadamente en blanco
+\end{center}
+\vspace*{\fill}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage{\pagestyle{empty}}
+\thispagestyle{empty}
+
+\chapter{\LARGE Conclusiones y líneas futuras}
+\label{chapter:conclusiones}
+
+\input{5conclusiones}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  % Página intencionadamente en blanco
+\end{center}
+\vspace*{\fill}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage{\pagestyle{empty}}
+\thispagestyle{empty}
+
+\chapter{\LARGE Summary and Conclusions}
+\label{chapter:conclusions}
+
+\input{6conclusions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  % Página intencionadamente en blanco
+\end{center}
+\vspace*{\fill}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage{\pagestyle{empty}}
+\thispagestyle{empty}
+
+\chapter{\LARGE Presupuesto}
+\label{chapter:presupuesto}
+\input{7presupuesto}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+  % Página intencionadamente en blanco
+\end{center}
+\vspace*{\fill}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage{\pagestyle{empty}\cleardoublepage}
+\thispagestyle{empty}
+
+\begin{appendix}
+
+	\chapter{\LARGE Instalación de programas necesarios}
+	\label{appendix:1}
+	\input{apendice1}
+
+	\chapter{\LARGE Configuración de los servicios y dispositivos}
+	\label{appendix:2}
+	\input{apendice2}
+
+	\chapter{\LARGE Otros apéndices}
+	\label{appendix:3}
+	\input{apendice3}
+
+
+\end{appendix}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aquí figurará la bibliografía
+
+\nocite{*}
+\bibliographystyle{ieeetr}
+\bibliography{bibliografia}
+% \printbibliography
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+

@@ -1,0 +1,13 @@
+// Zona directa principal - nombre -> IP
+zone "cazg.es" {
+    type slave;
+    file "/etc/bind/zones/db.cazg.es";
+    masters { 2001:db8:1234:0102::133; };  // ns1 IP IPv6
+};
+
+// Zona inversa para red de servicios (2001:db8:1234:0102::/64)
+zone "2.0.1.0.4.3.2.1.8.b.d.0.1.0.0.2.ip6.arpa" {
+    type slave;
+    file "/etc/bind/zones/db.2001.db8.1234.0102"; 
+    masters { 2001:db8:1234:0102::133; };  // ns1 IP IPv6
+}; 

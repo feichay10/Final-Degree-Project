@@ -1,0 +1,11 @@
+services:
+  pc_docker_ipv4:
+    container_name: pc_docker_ipv4
+    build:
+      context: .
+      dockerfile: Dockerfile
+    privileged: true
+    network_mode: bridge
+    sysctls:
+      net.ipv4.conf.all.forwarding: 1
+    restart: unless-stopped

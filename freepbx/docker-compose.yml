@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  freepbx:
+    image: tiredofit/freepbx:latest
+    container_name: freepbx
+    restart: always
+    network_mode: "host"
+    ports:
+      - "80:80"         # Web interface HTTP
+      - "443:443"       # Web interface HTTPS
+      - "5060:5060/udp" # SIP UDP
+      - "5160:5160/udp" # SIP UDP Alternative
+      - "18000-18100:18000-18100/udp" # RTP Ports
+    environment:
+      - VIRTUAL_HOST=freepbx.local
+      - RTP_START=18000
+      - RTP_FINISH=18100
+      - ASTERISKVERSION=18
+      - DB_EMBEDDED=TRUE  # Usa base de datos SQLite embebida
+    volumes:
+      - ./data:/data
+      - ./logs:/var/log

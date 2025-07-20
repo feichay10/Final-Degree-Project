@@ -1,0 +1,40 @@
+options {
+    directory "/var/cache/bind";
+
+    // Solo escuchar en IPv6
+    listen-on-v6 { 2001:db8:1234:0102::133; };
+    listen-on { none; }; // Deshabilitar IPv4
+
+    // Habilitar recursión
+    recursion yes;
+
+    // Permitir consultas solo desde red local
+    allow-query {
+        2001:db8:1234::/48;
+        localhost;
+    };
+
+    // Permitir recursión solo a clientes autorizados
+    allow-recursion {
+        2001:db8:1234::/48;
+        localhost;
+    };
+
+    // Permitir uso de caché solo a red local (explícito)
+    allow-cache {
+        2001:db8:1234::/48;
+        localhost;
+    };
+
+    // Redirigir consultas externas a resolvers públicos (opcional pero recomendado)
+    forwarders {
+        2001:4860:4860::8888;
+        2001:4860:4860::8844;
+    };
+
+    // Validación DNSSEC
+    dnssec-validation auto;
+
+    // No anunciarse como autoritativo en respuestas NXDOMAIN
+    auth-nxdomain no;
+};

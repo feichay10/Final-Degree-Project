@@ -1,0 +1,66 @@
+# Ignorar entornos virtuales
+venv/
+*.pyc
+__pycache__/
+
+# Archivos de configuración locales
+.env
+*.env
+
+# Configuración específica del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos creados por IDEs/editores
+.vscode/
+.idea/
+*.swp
+
+# Archivos de construcción de LaTeX
+*.aux
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.synctex.gz
+*.toc
+
+# Archivos de indentación
+indent.log
+
+# Otros archivos temporales de LaTeX comunes
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.fot
+*.cb
+*.cb2
+*.figlist
+*.makefile
+*.nav
+*.snm
+*.vrb
+*.xdy
+*.tdo
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+*.idx
+*.ind
+*.ilg
+*.brf
+*.nlo
+*.nls
+*.nlg
+*.listing
+
+# Archivos de backup
+*.backup
+*~

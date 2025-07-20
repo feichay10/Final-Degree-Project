@@ -1,0 +1,22 @@
+$TTL    60
+@       IN      SOA     ns1.cazg.es. admin.cazg.es. (
+                        2025070102      ; Serial
+                        60              ; Refresh
+                        60              ; Retry
+                        60              ; Expire
+                        60 )            ; TTL mínimo
+
+; Servidores de nombres
+        IN      NS      ns1.cazg.es.
+        IN      NS      ns2.cazg.es.
+
+; Registros PTR para resolución inversa - Red de servicios (2001:db8:1234:0102::/64)
+
+; Infraestructura DNS y DHCP
+2.3.1.0.0.0.0.0.0.0.0.0.0.0.0.0.2.0.1.0.4.3.2.1.8.b.d.0.1.0.0.2.ip6.arpa. IN PTR dhcp.cazg.es.
+3.3.1.0.0.0.0.0.0.0.0.0.0.0.0.0.2.0.1.0.4.3.2.1.8.b.d.0.1.0.0.2.ip6.arpa. IN PTR ns1.cazg.es.
+4.3.1.0.0.0.0.0.0.0.0.0.0.0.0.0.2.0.1.0.4.3.2.1.8.b.d.0.1.0.0.2.ip6.arpa. IN PTR ns2.cazg.es.
+
+; Servicios de prueba locales
+0.1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.2.0.1.0.4.3.2.1.8.b.d.0.1.0.0.2.ip6.arpa. IN PTR test.cazg.es.
+0.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0.2.0.1.0.4.3.2.1.8.b.d.0.1.0.0.2.ip6.arpa. IN PTR local.cazg.es. 
