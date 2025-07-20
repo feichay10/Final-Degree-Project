@@ -24,6 +24,8 @@ In this repository you will find the report made on LaTeX, the configuration fil
 - **Collaboration**: GitHub
 - **License**: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
 
-## Licencia
+## Other things
+In the `images` folder you can see the devices used for the simulations, in case that when opening the simulations (which are projects that are imported directly into GNS3), gives error, install these images and you are done.
 
-Este trabajo está licenciado bajo una licencia [Creative Commons Atribución-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.es).
+## Licence
+This work is licensed under a [Creative Commons Atribución-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.es).
