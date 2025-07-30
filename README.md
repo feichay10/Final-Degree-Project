@@ -2,6 +2,8 @@
 
 > **Written by: Cheuk Kelly Ng Pante**
 
+You can access the full report in [RIULL ULL Database](https://riull.ull.es/xmlui/handle/915/42556).
+
 ## Description:
 This project presents the design and simulation of a network infrastructure, aimed at improving 
 connectivity and centralised management of a multi-site organisation. This study proposes a modern, scalable and secure network architecture; designed according to the current needs 
